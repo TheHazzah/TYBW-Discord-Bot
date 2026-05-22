@@ -9,9 +9,7 @@
 
 <br/>
 
-![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
-![discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-white?style=flat-square)
+
 
 </div>
 
