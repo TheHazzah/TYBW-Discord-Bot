@@ -19,11 +19,11 @@
 
 ## What it does
 
-The moment a new episode lands on nyaa.si, this bot fires off an `@everyone` announcement in whatever Discord channel you point it at — complete with the torrent filename, a direct link, and seeder/leecher info pulled straight from the RSS feed.
+The moment a new episode lands on nyaa.si, this bot pings off an `@everyone` announcement in whatever Discord channel you point it at — complete with the torrent filename, a direct link, and seeder/leecher info pulled straight from the RSS feed.
 
-It polls nyaa every 5 minutes (configurable), and it's smart about what it announces. Multiple subgroups often upload the same episode within hours of each other — SubsPlease, Erai-raws, and others. The bot detects the episode number from the title and only ever pings once per episode, no matter how many groups upload it. The first one through wins, everything after gets silently skipped.
+It polls nyaa every 5 minutes (configurable), and it works great. Because multiple subgroups often upload the same episode within hours of each other such as SubsPlease, Erai-raws, and others, the bot detects the episode number from the title and only ever pings once per episode, no matter how many groups upload it. The first one through wins, everything after gets silently skipped.
 
-The matching is intentionally strict too. It won't ping you for a random Bleach filler repack or an older arc re-upload. It only fires when both `Bleach` and the specific arc subtitle — `The Calamity` or `Kashin-tan` — appear in the title together.
+The matching is intentionally strict too. It only pings when both `Bleach` and the specific arc subtitle — `The Calamity` or `Kashin-tan` — appear in the title together.
 
 Everything it's seen is saved locally so it survives restarts without losing its memory or sending duplicate pings.
 
@@ -90,27 +90,6 @@ When inviting the bot to your server, make sure it has:
 | `Send Messages` | To post announcements |
 | `Embed Links` | To render the rich embed card |
 | `Mention Everyone` | To ping `@everyone` on a new upload |
-
----
-
-## Running 24/7 with Docker
-
-If you want the bot running around the clock on a server or VPS, Docker is the easiest path.
-
-```bash
-# Build the image
-docker build -t bleach-tybw-bot .
-
-# Run it (mount seen.json so state persists across restarts)
-docker run -d \
-  --name bleach-tybw-bot \
-  --restart unless-stopped \
-  --env-file .env \
-  -v $(pwd)/seen.json:/app/seen.json \
-  bleach-tybw-bot
-```
-
-The `-v` flag is important — it keeps the bot's memory of past announcements alive even if the container is rebuilt or restarted.
 
 ---
 
