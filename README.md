@@ -75,7 +75,7 @@ CHECK_INTERVAL_MS=300000
 npm start
 ```
 
-You'll see the bot log in and confirm it's watching. From there it checks nyaa silently in the background until something shows up.
+You'll see the bot log in and confirm it's watching, and from there it checks nyaa silently in the background until something shows up.
 
 ---
 
