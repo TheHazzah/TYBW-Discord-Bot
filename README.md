@@ -7,6 +7,9 @@
 **A Discord bot that watches nyaa.si and announces the moment a new episode of**
 **_Bleach: Thousand-Year Blood War — The Calamity_ or _Sennen Kessen-hen — Kashin-tan_ drops.**
 
+No more refreshing the page. No more missing the upload window.
+The bot does the waiting so you don't have to.
+
 <br/>
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
@@ -21,9 +24,11 @@
 
 The moment a new episode lands on nyaa.si, this bot fires off an `@everyone` announcement in whatever Discord channel you point it at — complete with the torrent filename, a direct link, and seeder/leecher info pulled straight from the RSS feed.
 
-It polls nyaa every 5 minutes (configurable), keeps a local record of everything it's already announced so you never get a duplicate ping, and survives restarts without losing its memory.
+It polls nyaa every 5 minutes (configurable), and it's smart about what it announces. Multiple subgroups often upload the same episode within hours of each other — SubsPlease, Erai-raws, and others. The bot detects the episode number from the title and only ever pings once per episode, no matter how many groups upload it. The first one through wins, everything after gets silently skipped.
 
-The matching is intentionally strict. It won't ping you for a random Bleach filler repack or an older arc re-upload. It only fires when both `Bleach` and the specific arc subtitle — `The Calamity` or `Kashin-tan` — appear in the title together.
+The matching is intentionally strict too. It won't ping you for a random Bleach filler repack or an older arc re-upload. It only fires when both `Bleach` and the specific arc subtitle — `The Calamity` or `Kashin-tan` — appear in the title together.
+
+Everything it's seen is saved locally so it survives restarts without losing its memory or sending duplicate pings.
 
 ---
 
@@ -125,6 +130,16 @@ This means a stray upload titled `Bleach - Thousand-Year Blood War - 26` won't s
 
 ---
 
+## One ping per episode
+
+Multiple subgroups often upload the same episode within hours of each other. Without deduplication, you'd get pinged for every single one. The bot avoids this by extracting the episode number from the title and tracking it separately from the torrent itself.
+
+The first upload of episode 01 triggers the announcement. Every subsequent upload of episode 01 — from any subgroup, in any quality — is silently skipped. When episode 02 appears, the cycle resets.
+
+This is tracked in `seen.json` alongside the torrent history, so it persists across restarts too.
+
+---
+
 ## Project structure
 
 ```
@@ -134,7 +149,7 @@ bleach-tybw-bot/
 ├── Dockerfile
 ├── .env.example      # Copy this to .env and fill it in
 ├── .gitignore
-└── seen.json         # Auto-created on first run, tracks announced uploads
+└── seen.json         # Auto-created on first run, tracks episodes + torrents
 ```
 
 ---
@@ -156,4 +171,3 @@ Built for the wait between episodes. May it make the drought a little more beara
 *— for the Bleach fans still showing up.*
 
 </div>
-
