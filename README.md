@@ -7,9 +7,6 @@
 **A Discord bot that watches nyaa.si and announces the moment a new episode of**
 **_Bleach: Thousand-Year Blood War — The Calamity_ or _Sennen Kessen-hen — Kashin-tan_ drops.**
 
-No more refreshing the page. No more missing the upload window.
-The bot does the waiting so you don't have to.
-
 <br/>
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
