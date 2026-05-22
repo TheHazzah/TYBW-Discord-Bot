@@ -140,8 +140,5 @@ bleach-tybw-bot/
 
 <div align="center">
 
-Built for the wait between episodes. May it make the drought a little more bearable.
-
-*— for the Bleach fans still showing up.*
 
 </div>
